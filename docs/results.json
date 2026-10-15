@@ -1,0 +1,363 @@
+{
+  "host": {
+    "cpu": "Intel(R) Core(TM) i7-10870H CPU @ 2.20GHz",
+    "machine": "AMD64",
+    "system": "Windows 11",
+    "python": "3.13.5",
+    "timestamp": "2026-10-15 20:24:15"
+  },
+  "block": 4096,
+  "body_ops": 0,
+  "cost_model": {
+    "c_hit_ns": 2.3351972028308308,
+    "mispredict_ns": 8.681128938828195,
+    "fold_item_ns": 3.162028492159325,
+    "fold_repeat_ns": 2.977985158930651,
+    "fold_bucket_ns": 9.044443755085888,
+    "fit_residual_ns": 0.42727670336442436
+  },
+  "calibration": [
+    {
+      "stream": "uniform256",
+      "miss_rate": 0.995941162109375,
+      "repeat_rate": 0.004318303196765088,
+      "slots": 257,
+      "table_ns": 11.34033203125,
+      "fold_ns": 3.917694091796875
+    },
+    {
+      "stream": "uniform64",
+      "miss_rate": 0.9842071533203125,
+      "repeat_rate": 0.01582360570687419,
+      "slots": 65,
+      "table_ns": 11.0015869140625,
+      "fold_ns": 3.176116943359375
+    },
+    {
+      "stream": "uniform16",
+      "miss_rate": 0.9372711181640625,
+      "repeat_rate": 0.06196688792248417,
+      "slots": 17,
+      "table_ns": 10.317230224609375,
+      "fold_ns": 3.36151123046875
+    },
+    {
+      "stream": "uniform4",
+      "miss_rate": 0.7506256103515625,
+      "repeat_rate": 0.24812695506218052,
+      "slots": 5,
+      "table_ns": 8.666229248046875,
+      "fold_ns": 3.961944580078125
+    },
+    {
+      "stream": "zipf64",
+      "miss_rate": 0.866790771484375,
+      "repeat_rate": 0.11807431143663691,
+      "slots": 65,
+      "table_ns": 9.427642822265625,
+      "fold_ns": 3.72467041015625
+    },
+    {
+      "stream": "hot90",
+      "miss_rate": 0.126190185546875,
+      "repeat_rate": 0.8095979247730221,
+      "slots": 33,
+      "table_ns": 3.54156494140625,
+      "fold_ns": 6.1492919921875
+    },
+    {
+      "stream": "hot99",
+      "miss_rate": 0.0118255615234375,
+      "repeat_rate": 0.9807125963225757,
+      "slots": 9,
+      "table_ns": 1.485443115234375,
+      "fold_ns": 6.4544677734375
+    },
+    {
+      "stream": "cycle7",
+      "miss_rate": 0.0001373291015625,
+      "repeat_rate": 0.0,
+      "slots": 8,
+      "table_ns": 2.66265869140625,
+      "fold_ns": 3.10821533203125
+    },
+    {
+      "stream": "runs64",
+      "miss_rate": 0.220428466796875,
+      "repeat_rate": 0.877103837644007,
+      "slots": 65,
+      "table_ns": 5.054473876953125,
+      "fold_ns": 5.03997802734375
+    }
+  ],
+  "workloads": [
+    {
+      "workload": "cpython-opcodes",
+      "what": "bytecode dispatch in an interpreter eval loop",
+      "source": "sys.settrace opcode events over a json plus sort workload",
+      "keys": 131072,
+      "cases": 150,
+      "slots": 257,
+      "miss_rate": 0.017333984375,
+      "repeat_rate": 0.023010605020218206,
+      "predicted_direct_ns": 2.485675756213839,
+      "predicted_fold_ns": 3.7980395832515623,
+      "choice": "table",
+      "timings": {
+        "jump-table": {
+          "ns_per_key": 2.245330810546875,
+          "code_bytes": 3944,
+          "verified": true
+        },
+        "binary-search": {
+          "ns_per_key": 3.973388671875,
+          "code_bytes": 4752,
+          "verified": true
+        },
+        "fold": {
+          "ns_per_key": 3.458404541015625,
+          "code_bytes": 21040,
+          "verified": true
+        }
+      },
+      "baseline_ns": 2.245330810546875,
+      "fold_ns": 3.458404541015625,
+      "chosen_ns": 2.245330810546875,
+      "speedup_vs_baseline": 1.0,
+      "fold_speedup": 0.6492389146260754,
+      "decision_correct": true,
+      "regret_ns": 0.0
+    },
+    {
+      "workload": "ast-kinds",
+      "what": "AST node kind dispatch in a visitor",
+      "source": "94 node kinds over the Python stdlib sources",
+      "keys": 121485,
+      "cases": 94,
+      "slots": 95,
+      "miss_rate": 0.291229248046875,
+      "repeat_rate": 0.09860379949645227,
+      "predicted_direct_ns": 4.8633958558837325,
+      "predicted_fold_ns": 3.665440178032615,
+      "choice": "fold",
+      "timings": {
+        "jump-table": {
+          "ns_per_key": 5.473103675350866,
+          "code_bytes": 1976,
+          "verified": true
+        },
+        "binary-search": {
+          "ns_per_key": 6.7456887681606785,
+          "code_bytes": 3088,
+          "verified": true
+        },
+        "fold": {
+          "ns_per_key": 3.563402889245586,
+          "code_bytes": 7920,
+          "verified": true
+        }
+      },
+      "baseline_ns": 5.473103675350866,
+      "fold_ns": 3.563402889245586,
+      "chosen_ns": 3.563402889245586,
+      "speedup_vs_baseline": 1.5359205359205357,
+      "fold_speedup": 1.5359205359205357,
+      "decision_correct": true,
+      "regret_ns": 0.0
+    },
+    {
+      "workload": "text-bytes",
+      "what": "byte dispatch in a UTF-8 scanner or lexer",
+      "source": "first 2165167 bytes of the Python stdlib sources",
+      "keys": 131072,
+      "cases": 256,
+      "slots": 257,
+      "miss_rate": 0.3051300048828125,
+      "repeat_rate": 0.1637140459296559,
+      "predicted_direct_ns": 4.984070118323803,
+      "predicted_fold_ns": 4.217052342090343,
+      "choice": "fold",
+      "timings": {
+        "jump-table": {
+          "ns_per_key": 6.130218505859375,
+          "code_bytes": 5216,
+          "verified": true
+        },
+        "binary-search": {
+          "ns_per_key": 9.14154052734375,
+          "code_bytes": 7864,
+          "verified": true
+        },
+        "fold": {
+          "ns_per_key": 3.902435302734375,
+          "code_bytes": 21040,
+          "verified": true
+        }
+      },
+      "baseline_ns": 6.130218505859375,
+      "fold_ns": 3.902435302734375,
+      "chosen_ns": 3.902435302734375,
+      "speedup_vs_baseline": 1.5708699902248289,
+      "fold_speedup": 1.5708699902248289,
+      "decision_correct": true,
+      "regret_ns": 0.0
+    },
+    {
+      "workload": "compressed-bytes",
+      "what": "byte dispatch in an entropy or container decoder",
+      "source": "first 1048576 bytes of pip-25.0.1-py3-none-any.whl",
+      "keys": 131072,
+      "cases": 256,
+      "slots": 257,
+      "miss_rate": 0.981781005859375,
+      "repeat_rate": 0.00801098649576562,
+      "predicted_direct_ns": 10.858164704388503,
+      "predicted_fold_ns": 3.753370941896121,
+      "choice": "fold",
+      "timings": {
+        "jump-table": {
+          "ns_per_key": 10.576629638671875,
+          "code_bytes": 5216,
+          "verified": true
+        },
+        "binary-search": {
+          "ns_per_key": 27.130126953125,
+          "code_bytes": 7864,
+          "verified": true
+        },
+        "fold": {
+          "ns_per_key": 3.722381591796875,
+          "code_bytes": 21040,
+          "verified": true
+        }
+      },
+      "baseline_ns": 10.576629638671875,
+      "fold_ns": 3.722381591796875,
+      "chosen_ns": 3.722381591796875,
+      "speedup_vs_baseline": 2.8413609346177497,
+      "fold_speedup": 2.8413609346177497,
+      "decision_correct": true,
+      "regret_ns": 0.0
+    },
+    {
+      "workload": "pe-code-bytes",
+      "what": "opcode byte dispatch in an instruction decoder",
+      "source": "1048576 bytes from the body of shell32.dll",
+      "keys": 131072,
+      "cases": 256,
+      "slots": 257,
+      "miss_rate": 0.59222412109375,
+      "repeat_rate": 0.08650339513237201,
+      "predicted_direct_ns": 7.476371158729878,
+      "predicted_fold_ns": 3.9871201699046552,
+      "choice": "fold",
+      "timings": {
+        "jump-table": {
+          "ns_per_key": 8.2183837890625,
+          "code_bytes": 5216,
+          "verified": true
+        },
+        "binary-search": {
+          "ns_per_key": 13.531494140625,
+          "code_bytes": 7864,
+          "verified": true
+        },
+        "fold": {
+          "ns_per_key": 3.855133056640625,
+          "code_bytes": 21040,
+          "verified": true
+        }
+      },
+      "baseline_ns": 8.2183837890625,
+      "fold_ns": 3.855133056640625,
+      "chosen_ns": 3.855133056640625,
+      "speedup_vs_baseline": 2.1318028893726497,
+      "fold_speedup": 2.1318028893726497,
+      "decision_correct": true,
+      "regret_ns": 0.0
+    },
+    {
+      "workload": "json-classes",
+      "what": "character class dispatch in a JSON scanner",
+      "source": "466192 bytes of levenshtein_examples.json",
+      "keys": 131072,
+      "cases": 14,
+      "slots": 15,
+      "miss_rate": 0.0594024658203125,
+      "repeat_rate": 0.4197299153124285,
+      "predicted_direct_ns": 2.8508776679012984,
+      "predicted_fold_ns": 4.445099692986116,
+      "choice": "table",
+      "timings": {
+        "if-chain": {
+          "ns_per_key": 2.3834228515625,
+          "code_bytes": 408,
+          "verified": true
+        },
+        "jump-table": {
+          "ns_per_key": 3.118896484375,
+          "code_bytes": 376,
+          "verified": true
+        },
+        "binary-search": {
+          "ns_per_key": 2.4749755859375,
+          "code_bytes": 488,
+          "verified": true
+        },
+        "fold": {
+          "ns_per_key": 4.311370849609375,
+          "code_bytes": 1440,
+          "verified": true
+        }
+      },
+      "baseline_ns": 3.118896484375,
+      "fold_ns": 4.311370849609375,
+      "chosen_ns": 3.118896484375,
+      "speedup_vs_baseline": 1.0,
+      "fold_speedup": 0.7234117855246859,
+      "decision_correct": true,
+      "regret_ns": 0.0
+    }
+  ],
+  "handler_sweep": [
+    {
+      "body_ops": 0,
+      "table_ns": 11.5020751953125,
+      "fold_ns": 3.730010986328125,
+      "speedup": 3.083657189609327
+    },
+    {
+      "body_ops": 2,
+      "table_ns": 11.164093017578125,
+      "fold_ns": 4.155731201171875,
+      "speedup": 2.6864328988434
+    },
+    {
+      "body_ops": 4,
+      "table_ns": 11.07177734375,
+      "fold_ns": 4.035186767578125,
+      "speedup": 2.743807903195311
+    },
+    {
+      "body_ops": 8,
+      "table_ns": 12.146759033203125,
+      "fold_ns": 4.621124267578125,
+      "speedup": 2.6285289747399703
+    },
+    {
+      "body_ops": 16,
+      "table_ns": 13.182830810546875,
+      "fold_ns": 6.060791015625,
+      "speedup": 2.175100704934542
+    }
+  ],
+  "totals": {
+    "always_table_ns": 35.76256290386649,
+    "always_fold_ns": 22.813128231042462,
+    "dispatchfold_ns": 20.407580135339337,
+    "speedup_vs_always_table": 1.7524156547075016,
+    "speedup_vs_always_fold": 1.1178752247816728,
+    "decisions_correct": 6,
+    "decisions": 6
+  }
+}
